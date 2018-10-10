@@ -20,12 +20,14 @@ object ParseClients {
     }
 
     for {
+      atol10Message <- parseResource(Atol10)
       atolMessage <- parseResource(Atol)
       piritMessage <- parseResource(Pirit)
       shtrihMessage <- parseResource(ShtrihM)
     } yield ParseResponse(
-      messages = Seq(atolMessage, piritMessage, shtrihMessage).flatten,
+      messages = Seq(atol10Message, atolMessage, piritMessage, shtrihMessage).flatten,
       versions = Versions(
+        atol_10 = selectVersion(atol10Message, prevVersions.atol_10),
         atol = selectVersion(atolMessage, prevVersions.atol),
         pirit = selectVersion(piritMessage, prevVersions.pirit),
         shtrihM = selectVersion(shtrihMessage, prevVersions.shtrihM)

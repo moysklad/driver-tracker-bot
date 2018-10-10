@@ -15,7 +15,7 @@ final class DB(filename: String) {
       versions <- managed(input).map({
         stream => Json.parse(stream).asOpt
       }).opt
-    } yield versions).flatten.getOrElse(Versions("0", "0", "0"))
+    } yield versions).flatten.getOrElse(Versions("0", "0", "0", "0"))
   }
 
   def write(versions: Versions)(implicit w: Writes[Versions]): Unit = {
