@@ -6,22 +6,25 @@ import play.api.libs.functional.syntax._
 object ReadWriters {
 
   implicit val versionsWriter = (
-    (JsPath \ "atol").write[String] and
+    (JsPath \ "atol_10").write[String] and
+      (JsPath \ "atol").write[String] and
       (JsPath \ "shrihm").write[String] and
       (JsPath \ "pirit").write[String]
   )(unlift(Versions.unapply))
 
   implicit val versionsReader = (
-    (JsPath \ "atol").read[String] and
+    (JsPath \ "atol_10").read[String] and
+      (JsPath \ "atol").read[String] and
       (JsPath \ "shrihm").read[String] and
       (JsPath \ "pirit").read[String]
-  )(Versions.apply _)
+    )(Versions.apply _)
 
   implicit val messageWriter = new Writes[Seq[Message]] {
     override def writes(messages: Seq[Message]): JsValue = {
       val drivers = for {
         msg <- messages
         vendorMsg = msg.vendor match {
+          case Atol10 => "Атол (10 версия)"
           case Atol => "Атол"
           case Pirit => "Пирит"
           case ShtrihM => "Штрих-М"

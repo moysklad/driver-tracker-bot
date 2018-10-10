@@ -50,4 +50,18 @@ class ScraperTest extends FunSuite {
     )
     assert(message.contains(expectedMessage))
   }
+
+  test("Atol 10 scraping") {
+    val message = managed(new FileInputStream(s"$resourceDir/atol10.html"))
+      .map(s => Scraper.message(Atol10, s))
+      .opt
+      .flatten
+
+    val expectedMessage = Message(
+      vendor = Atol10,
+      version = "10.3.1",
+      link = "https://dfiles.ru/files/ma1z7tpzi"
+    )
+    assert(message.contains(expectedMessage))
+  }
 }
