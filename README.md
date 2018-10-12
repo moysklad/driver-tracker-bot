@@ -5,8 +5,7 @@ The bot checks for updates and notifies you when an update is available every da
 
 ### Vendors
 
-- Atol (only 10.x versions)
-- Atol (only 9.x versions)
+- Atol (only 9/10.x versions)
 - Dreamkas
 - Shtrih M
 
