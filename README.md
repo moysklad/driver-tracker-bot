@@ -1,10 +1,11 @@
 # Driver Tracker Bot
 
-A bot for slack who follows the updates of drivers for receipt printers.
-The bot check for updates every day in the same time.
+A bot for slack which monitors updates of receipt printer drivers.
+The bot checks for updates and notifies you when an update is available every day at the same time.
 
 ### Vendors
 
+- Atol (only 10.x versions)
 - Atol (only 9.x versions)
 - Dreamkas
 - Shtrih M
