@@ -7,7 +7,7 @@ case object Atol extends Vendor {
   def resource: String = "http://www.kassa-online.su/2017/08/01/gde-skachat-drajvera-atol/"
 }
 case object Atol10 extends Vendor {
-  def resource: String = "http://www.kassa-online.su/2017/08/01/gde-skachat-drajvera-atol/"
+  def resource: String = "http://fs.atol.ru/SitePages/Центр%20загрузки.aspx?raz1=Программное+обеспечение&raz2=ДТО"
 }
 case object ShtrihM extends Vendor {
   def resource: String = "https://www.shtrih-m.ru/support/download/?section_id=all&product_id=all&type_id=156&searchDownloads=%D0%A8%D0%A2%D0%A0%D0%98%D0%A5-%D0%9C%3A+%D0%94%D1%80%D0%B0%D0%B9%D0%B2%D0%B5%D1%80+%D0%9A%D0%9A%D0%A2+"

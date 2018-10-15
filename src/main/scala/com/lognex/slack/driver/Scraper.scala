@@ -58,16 +58,17 @@ object Scraper {
 
   private def genAtol10Message(input: InputStream): Option[Message] = {
     val browser = JsoupBrowser()
-    val elements = browser.parseInputStream(input) >> elementList("p") >?> (text, element(
+    val elements = browser.parseInputStream(input) >> elementList("td") >?> (text("a"), element(
       "a"))
 
     val message = elements
       .collect({
         case (Some(atol10VersionRegexp(version)), Some(link)) =>
-          Message(Atol10, version, link >> attr("href"))
+          Message(Atol10, version, s"$atol10Host${link >> attr("href")}")
       })
       .sorted(Ordering.by[Message, String](_.version).reverse)
       .headOption
+
 
     message
   }
@@ -75,7 +76,8 @@ object Scraper {
   private val piritVersionRegexp = "(.*PiritLib-v*(.*)\\.7z)$".r
   private val shtrihVersionRegexp = "(.*)\\s\\(.*$".r
   private val atolVersionRegexp = "(9.*)\\s—.*$".r
-  private val atol10VersionRegexp = "(10.*)\\s—.*$".r
+  private val atol10VersionRegexp = "^Драйвер ККТ (10.*)$".r
   private val shtrihHost = "https://www.shtrih-m.ru"
   private val piritHost = "https://help.dreamkas.ru"
+  private val atol10Host = "http://fs.atol.ru"
 }
