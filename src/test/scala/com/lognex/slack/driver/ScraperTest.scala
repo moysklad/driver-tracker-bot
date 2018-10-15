@@ -59,8 +59,8 @@ class ScraperTest extends FunSuite {
 
     val expectedMessage = Message(
       vendor = Atol10,
-      version = "10.3.1",
-      link = "https://dfiles.ru/files/ma1z7tpzi"
+      version = "10.4.1",
+      link = "http://fs.atol.ru/_layouts/15/atol.templates/Handlers/FileHandler.ashx?guid=10da0faa-6589-49a6-917e-af1cb740a88d;webUrl="
     )
     assert(message.contains(expectedMessage))
   }
