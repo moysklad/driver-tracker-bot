@@ -38,6 +38,13 @@ mergeStrategy in assembly := {
   case x => MergeStrategy.first
 }
 
+artifact in (Compile, assembly) := {
+  val art = (artifact in (Compile, assembly)).value
+  art.withClassifier(Some("assembly"))
+}
+
+addArtifact(artifact in (Compile, assembly), assembly)
+
 val repoUrl = "https://repo.moysklad.ru/artifactory/"
 publishTo in Global := {
   if (isSnapshot.value) {
