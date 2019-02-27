@@ -3,7 +3,6 @@ import AssemblyKeys._
 organization := "com.lognex"
 
 name := "driver-tracker-bot"
-version := "1.0"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -37,4 +36,13 @@ jarName in assembly := { s"${name.value}-${version.value}.jar"}
 mergeStrategy in assembly := {
   case PathList("META-INF", xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
+}
+
+val repoUrl = "https://repo.moysklad.ru/artifactory/"
+publishTo in Global := {
+  if (isSnapshot.value) {
+    Some("Moysklad Libs Snapshot Repo" at repoUrl + "libs-snapshot-local")
+  } else {
+    Some("Moysklad Libs Release Repo" at repoUrl + "libs-release-local")
+  }
 }
