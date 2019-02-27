@@ -12,9 +12,11 @@ final class DB(filename: String) {
   def read(implicit r: Reads[Versions]): Versions = {
     (for {
       input <- Try(new FileInputStream(filename)).toOption
-      versions <- managed(input).map({
-        stream => Json.parse(stream).asOpt
-      }).opt
+      versions <- managed(input)
+        .map({ stream =>
+          Json.parse(stream).asOpt
+        })
+        .opt
     } yield versions).flatten.getOrElse(Versions("0", "0", "0", "0"))
   }
 

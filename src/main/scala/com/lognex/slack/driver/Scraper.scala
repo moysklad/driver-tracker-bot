@@ -13,13 +13,12 @@ object Scraper {
       case Pirit   => genPiritMessage(stream)
       case Atol    => genAtolMessage(stream)
       case ShtrihM => genShtrihmMessage(stream)
-      case Atol10 => genAtol10Message(stream)
+      case Atol10  => genAtol10Message(stream)
     }
 
   private def genPiritMessage(input: InputStream): Option[Message] = {
     val browser = JsoupBrowser()
-    val links = browser.parseInputStream(input) >> elementList("a") >> attr(
-      "href")
+    val links = browser.parseInputStream(input) >> elementList("a") >> attr("href")
     links collectFirst {
       case piritVersionRegexp(link, version) =>
         Message(Pirit, version, piritHost + link)
@@ -28,8 +27,8 @@ object Scraper {
 
   private def genShtrihmMessage(input: InputStream): Option[Message] = {
     val browser = JsoupBrowser()
-    val tds = browser.parseInputStream(input) >> element(".pageCont") >> element(
-      "table") >> elementList("td")
+    val tds = browser.parseInputStream(input) >> element(".pageCont") >> element("table") >> elementList(
+      "td")
     for {
       version <- tds
         .lift(1)
@@ -41,8 +40,7 @@ object Scraper {
 
   private def genAtolMessage(input: InputStream): Option[Message] = {
     val browser = JsoupBrowser()
-    val elements = browser.parseInputStream(input) >> elementList("p") >?> (text, element(
-      "a"))
+    val elements = browser.parseInputStream(input) >> elementList("p") >?> (text, element("a"))
 
     val message = elements
       .collect({
@@ -68,7 +66,6 @@ object Scraper {
       })
       .sorted(Ordering.by[Message, String](_.version).reverse)
       .headOption
-
 
     message
   }
